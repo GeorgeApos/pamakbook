@@ -49,33 +49,22 @@ public class user_page extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				boolean flag1 = false;
-				boolean flag2 = false;
-				
 				for(users aUser : connector.getUsersOfTheApp()) {
 					for(users aSecondUser : connector.getUsersOfTheApp()) {
-						if(aUser.getEmail().equals(email) && aSecondUser.getName().equals(addFriend.getText())) {
-							if(!aUser.checkIfFriend(aSecondUser)) {
-								aUser.addFriend(aSecondUser);
-								JOptionPane.showMessageDialog(userPage, aUser.getName() + " is now friends with " + aSecondUser.getName());
-								flag1 = false;
-							}else {
-								flag1 = true;
-							}
-							flag2 = false;
-						}else {
-							flag2 = true;
-						}
+						 if(aUser.getEmail().equals(email) && aSecondUser.getName().equals(addFriend.getText())) {
+							 if(!aUser.checkIfFriend(aSecondUser)) {
+								 aUser.addFriend(aSecondUser);
+							 }else {
+								 JOptionPane.showMessageDialog(userPage, "Users are already Friends");
+								 break;
+							 }
+						 }else {
+							 JOptionPane.showMessageDialog(userPage, "There was an error with the Users!");
+							 break;
+						 }
 					}
-					
-				}
-				if(flag1) {
-					JOptionPane.showMessageDialog(userPage, "They are already friends!" );
 				}
 				
-				if(flag2) {
-					JOptionPane.showMessageDialog(userPage, "Error");
-				}
 			}
 			
 		});

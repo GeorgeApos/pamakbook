@@ -13,7 +13,7 @@ public class groups {
 		this.name = name;
 		this.description = description;
 		
-		connector.listOfGroups.add(this);
+		connector.writeToListGroup(this);
 	}
 
 	public String getName() {

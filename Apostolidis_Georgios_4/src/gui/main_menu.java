@@ -37,15 +37,18 @@ public class main_menu extends JFrame
 				String name = userName.getText();
 				String email = userEmail.getText();
 				
-				
-				if(email.startsWith("iis")
-						||email.startsWith("dai")
-						||email.startsWith("ics")
-						&&email.endsWith("@uom.edu.gr")){
-					new users(name, email, connector);
-					JOptionPane.showMessageDialog(mainMenu, "User " + name + " has been created!");
+				if(connector.checkIfUnique(name, email)) {
+					if(email.startsWith("iis")
+							||email.startsWith("dai")
+							||email.startsWith("ics")
+							&&email.endsWith("@uom.edu.gr")){
+						new users(name, email, connector);
+						JOptionPane.showMessageDialog(mainMenu, "User " + name + " has been created!");
+					}else {
+						JOptionPane.showMessageDialog(mainMenu, "User " + name + " has not been created. Email format is not acceptable.");
+					}
 				}else {
-					JOptionPane.showMessageDialog(mainMenu, "User " + name + " has not been created. Email format is not acceptable.");
+					JOptionPane.showMessageDialog(mainMenu, "User " + name + " already exists!");
 				}
 			}
 		});
@@ -55,20 +58,25 @@ public class main_menu extends JFrame
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-						
-				infections_page infPage = new infections_page(mainMenu,userEmail.getText(), connector);
-				mainMenu.dispose();
-				
+				if(!connector.checkIfUnique(userName.getText(), userEmail.getText())) {	
+					infections_page infPage = new infections_page(mainMenu,userEmail.getText(), connector);
+					mainMenu.dispose();
+				}else {
+					JOptionPane.showMessageDialog(mainMenu, "User " + userName.getText() + " does not exist!");
+				}
 			}
-			
 		});
 		
 		enterUserPage.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(!connector.checkIfUnique(userName.getText(), userEmail.getText())) {	
 						user_page userPage = new user_page(mainMenu, userName.getText(), userEmail.getText(), connector);
 						mainMenu.dispose();
+				}else {
+					JOptionPane.showMessageDialog(mainMenu, "User " + userName.getText() + " does not exist!");
+				}
 			}
 			
 		});
