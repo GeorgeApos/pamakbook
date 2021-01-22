@@ -49,7 +49,7 @@ public class groups {
 	 */
 	public void inGroupAddMember(users sampleUser) {
 		if(!this.checkGroupForMember(sampleUser)) {
-			getListOfMembersInGroups().add(sampleUser);
+			listOfMembersInGroups.add(sampleUser);
 			sampleUser.setMembersGroup(this);
 			//System.out.println(sampleUser.getName() + " has been successfully enrolled in group " + this.name);
 			

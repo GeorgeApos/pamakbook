@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.event.*;
 import java.util.ArrayList;
 
@@ -11,6 +12,7 @@ public class infections_page extends JFrame
 {
 	private JFrame infPageFrame = new JFrame();
 	private JPanel mainPanel = new JPanel();
+	private JPanel secondPanel = new JPanel();
 	private JButton backToLogin = new JButton("Back To Login Screen");
 	private JTextArea mainText = new JTextArea(0,1);
 	
@@ -38,9 +40,10 @@ public class infections_page extends JFrame
 	
 		
 		mainPanel.add(mainText);
-		mainPanel.add(backToLogin);
-		infPageFrame.add(mainPanel);
+		infPageFrame.add(mainPanel, BorderLayout.PAGE_START);
 		
+		secondPanel.add(backToLogin);
+		infPageFrame.add(secondPanel, BorderLayout.PAGE_END);
 		
 		infPageFrame.pack();
 		infPageFrame.setLocationRelativeTo(null);

@@ -54,6 +54,7 @@ public class user_page extends JFrame
 						 if(aUser.getEmail().equals(email) && aSecondUser.getName().equals(addFriend.getText())) {
 							 if(!aUser.checkIfFriend(aSecondUser)) {
 								 aUser.addFriend(aSecondUser);
+								 JOptionPane.showMessageDialog(userPage, aUser.getName() + " is now friend with " + aSecondUser.getName());
 							 }else {
 								 JOptionPane.showMessageDialog(userPage, "Users are already Friends");
 								 break;
@@ -70,24 +71,28 @@ public class user_page extends JFrame
 		});
 		
 		subToGroupButton.addActionListener(new ActionListener() {
-
+			
+			users subscriber;
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				for(users aUser : connector.getUsersOfTheApp()) {
-					for(groups aGroup : connector.getListOfGroups()) {
-						if(aGroup.getName().equals(subToGroup.getText())) {
-							if(aUser.getEmail().equals(userEmail.getText())){
-								aGroup.inGroupAddMember(aUser);
-								JOptionPane.showMessageDialog(userPage, aUser.getName() + "is enrolled in Group " + aGroup.getName());
-							}else {
-								JOptionPane.showMessageDialog(userPage, "Error");
-							}
-						}else {
-							JOptionPane.showMessageDialog(userPage, "There isn't any group named like that!");
-						}
+					if(aUser.getEmail().equals(email)){
+						subscriber = aUser;
+					}
+				}
+				for(groups aGroup : connector.getListOfGroups()) {
+					if(aGroup.getName().equals(subToGroup.getText())) {
+						aGroup.inGroupAddMember(subscriber);
+						JOptionPane.showMessageDialog(userPage, subscriber.getName() + "is enrolled in Group " + aGroup.getName());
+					}else {
+						JOptionPane.showMessageDialog(userPage, "There isn't any group named like that!");
 					}
 				}
 			}
+			
+			
 			
 		});
 		
@@ -118,7 +123,7 @@ public class user_page extends JFrame
 		userPage.pack();
 		userPage.setVisible(true);
 		userPage.setLocationRelativeTo(null);
-		userPage.setTitle("Selida Xristi");
+		userPage.setTitle("Σελίδα Χρήστη");
 		userPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
