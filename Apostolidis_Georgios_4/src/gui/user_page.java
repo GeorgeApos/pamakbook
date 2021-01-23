@@ -34,6 +34,12 @@ public class user_page extends JFrame
 	public user_page(JFrame mainMenu, String name, String email, connectedClass connector) 
 	{
 		
+		for(users aUser : connector.getUsersOfTheApp()) {
+			if(aUser.getEmail().equals(email)){
+				postsOfFriends.setText(aUser.returnMineAndMyFriendsPosts(connector));
+			}
+		}
+		
 		backToLogin.addActionListener(new ActionListener() {
 
 			@Override
@@ -91,9 +97,24 @@ public class user_page extends JFrame
 					}
 				}
 			}
-			
-			
-			
+		});
+		
+		
+		postButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				for(users aUser : connector.getUsersOfTheApp()) {
+					if(aUser.getEmail().equals(email)){
+						aUser.addANewPost(newPostField.getText(), connector);
+						JOptionPane.showMessageDialog(userPage, "A new post has been made.");
+						newPostField.setText("");
+						postsOfFriends.setText(aUser.returnMineAndMyFriendsPosts(connector));
+					}
+				}
+				
+			}
+		
 		});
 		
 		userName.setText(name);

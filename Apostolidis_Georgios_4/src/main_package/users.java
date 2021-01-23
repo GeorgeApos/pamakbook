@@ -179,24 +179,26 @@ public class users
 		
 	}
 	
-	public void addANewPost(String getText) {
+	public void addANewPost(String getText, connectedClass connector) {
 		posts newPost = new posts(formatter.format(date), getText, this.name);
-		System.out.println(formatter.format(date) + ": " + getText + " by User: " + this.name);
-		this.listOfUsersPosts.add(newPost);
+		connector.writeToListOfPosts(newPost);
 	}
 	
-	public void returnMineAndMyFriendsPosts() {
-		for(posts checkingPost : this.listOfUsersPosts) {
-			System.out.println(checkingPost.getTimestamp() + ": '' " + checkingPost.getPostText() + "''" + checkingPost.getName());
+	public String returnMineAndMyFriendsPosts(connectedClass connector) {
+		String postsText = "";
+		
+		for(posts checkingPost : connector.listOfUsersPosts) {
+			postsText += checkingPost.getName() + ", " + checkingPost.getTimestamp() + ", " + checkingPost.getPostText() + "\n";
 		}
 		for(users checkingUser : userFriends) {
 			if(this.checkIfFriend(checkingUser)) {
 				for(posts checkingPost : checkingUser.listOfUsersPosts) {
-					System.out.println(checkingPost.getTimestamp() + ": '' " + checkingPost.getPostText() + "''" + checkingPost.getName());
+					postsText += checkingPost.getName() + ", " + checkingPost.getTimestamp() + ", " + checkingPost.getPostText() + "\n";
 				}
-			}
-			
+			}	
 		}
+		
+		return postsText;
 	}
 	
 

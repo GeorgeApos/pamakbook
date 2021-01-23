@@ -6,11 +6,14 @@ public class connectedClass {
 	
 	ArrayList<users> usersOfTheApp;
 	ArrayList<groups> listOfGroups;
+	ArrayList<posts> listOfUsersPosts;
 	
 	
 	public connectedClass() {
 		usersOfTheApp = new ArrayList<>();
 		listOfGroups = new ArrayList<>();
+		listOfUsersPosts = new ArrayList<>();
+		
 	}
 	
 	public boolean checkIfUnique(String name, String email) {
@@ -30,6 +33,10 @@ public class connectedClass {
 	
 	public void writeToListGroup(groups aGroup ) {
 		listOfGroups.add(aGroup);
+	}
+	
+	public void writeToListOfPosts(posts newPost) {
+		listOfUsersPosts.add(newPost);
 	}
 
 	public ArrayList<users> getUsersOfTheApp() {
