@@ -36,18 +36,18 @@ public class closedGroups extends groups {
 	 * 
 	 */
 	@Override
-	public void inGroupAddMember(users sampleUser) {
+	public void inGroupAddMember(users sampleUser, connectedClass connector) {
 		if(this.getListOfMembersInGroups().isEmpty()) {
-			getListOfMembersInGroups().add(sampleUser);
+			connector.writeMemberToGroup(sampleUser);
+			sampleUser.setMembersGroup(this);			
+			//System.out.println(sampleUser.getName() + " has been successfully enrolled in group " + this.name);
+		}else if(!this.checkGroupForMember(sampleUser, connector) && 
+			sampleUser.checkForClosedGroups(this, connector)) {
+			connector.writeMemberToGroup(sampleUser);
 			sampleUser.setMembersGroup(this);
-			System.out.println(sampleUser.getName() + " has been successfully enrolled in group " + this.name);
-		}else if(!this.checkGroupForMember(sampleUser) && 
-			sampleUser.checkForClosedGroups(this)) {
-			this.getListOfMembersInGroups().add(sampleUser);
-			sampleUser.setMembersGroup(this);
-			System.out.println(sampleUser.getName() + " has been successfully enrolled in group " + this.name);
+			//System.out.println(sampleUser.getName() + " has been successfully enrolled in group " + this.name);
 		}else {
-			System.out.println("FAILED: " + sampleUser.getName() + " cannot be enrolled in group " + this.getName());
+			//System.out.println("FAILED: " + sampleUser.getName() + " cannot be enrolled in group " + this.getName());
 		}
 		
 	}

@@ -29,6 +29,18 @@ public class main_menu extends JFrame
 		
 		connectedClass connector = new connectedClass();
 		
+		users u1 = new users("Makis", "iis1998@uom.edu.gr", connector);
+		users u2 = new users("Petros", "ics1924@uom.edu.gr", connector);
+		users u3 = new users("Maria", "iis2012@uom.edu.gr", connector);
+		users u4 = new users("Gianna", "iis19133@uom.edu.gr", connector);
+		users u5 = new users("Nikos", "dai1758@uom.edu.gr", connector);
+		users u6 = new users("Babis", "ics19104@uom.edu.gr", connector);
+		users u7 = new users("Stella", "dai1827@uom.edu.gr", connector);
+		
+		groups g1 = new groups("WebGurus","A group for web passionates", connector);
+		closedGroups g2 = new closedGroups("ExamSolutions","Solutions to common exam questions", connector); 
+
+		
 		newUser.addActionListener(new ActionListener() {
 
 			@Override

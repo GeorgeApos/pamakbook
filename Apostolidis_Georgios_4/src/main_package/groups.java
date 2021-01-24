@@ -32,9 +32,8 @@ public class groups {
 	/*
 	 * 
 	 */
-	public boolean checkGroupForMember(users sampleUser) {
-		for(i=0; i<getListOfMembersInGroups().size(); i++) {
-			users checkingUser = getListOfMembersInGroups().get(i);
+	public boolean checkGroupForMember(users sampleUser, connectedClass connector) {
+		for(users checkingUser : connector.getListOfMembersInGroups()){
 			if(sampleUser.getName().equals(checkingUser.getName()) 
 					&& sampleUser.getEmail().equals(checkingUser.getEmail())
 					) {
@@ -47,9 +46,9 @@ public class groups {
 	/*
 	 * 
 	 */
-	public void inGroupAddMember(users sampleUser) {
-		if(!this.checkGroupForMember(sampleUser)) {
-			listOfMembersInGroups.add(sampleUser);
+	public void inGroupAddMember(users sampleUser, connectedClass connector) {
+		if(!this.checkGroupForMember(sampleUser, connector)) {
+			connector.writeMemberToGroup(sampleUser);
 			sampleUser.setMembersGroup(this);
 			//System.out.println(sampleUser.getName() + " has been successfully enrolled in group " + this.name);
 			

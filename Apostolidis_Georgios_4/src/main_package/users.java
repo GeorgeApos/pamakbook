@@ -3,12 +3,16 @@ package main_package;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.time.LocalDateTime; // Import the LocalDateTime class
+import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter class
 
 public class users 
 {
 	private users generalUser;
 	private groups generalGroup;
 	private Date date = new Date();
+	LocalDateTime myDateObj = LocalDateTime.now();
+	DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 	private SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 	private int i;
 	private String name;
@@ -151,11 +155,11 @@ public class users
 	}
 	
 	
-	public boolean checkForClosedGroups(groups checkingGroup) {
+	public boolean checkForClosedGroups(groups checkingGroup, connectedClass connector) {
 		boolean flag = false;
 		for(i=0; i<userFriends.size(); i++) {
 			users checkingUser = userFriends.get(i);
-			if(this.checkIfFriend(checkingUser) && checkingGroup.checkGroupForMember(checkingUser)) {
+			if(this.checkIfFriend(checkingUser) && checkingGroup.checkGroupForMember(checkingUser, connector)) {
 				return true;
 			}else {
 				flag = false;
@@ -180,7 +184,10 @@ public class users
 	}
 	
 	public void addANewPost(String getText, connectedClass connector) {
-		posts newPost = new posts(formatter.format(date), getText, this.name);
+		LocalDateTime myDateObj = LocalDateTime.now();
+		DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		String formattedDate = myDateObj.format(myFormatObj);
+		posts newPost = new posts(formattedDate, getText, this.name);
 		connector.writeToListOfPosts(newPost);
 	}
 	
