@@ -179,7 +179,7 @@ public class users
 		System.out.println("-----------------------------");
 	}
 	
-	public String suggestedFriends(connectedClass connector) {
+	public String suggestedFriends() {
 		String sugFriendText = "";
 		
 		for(users firstUser : userFriends) {

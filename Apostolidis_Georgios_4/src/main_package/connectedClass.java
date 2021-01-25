@@ -34,7 +34,7 @@ public class connectedClass {
 		usersOfTheApp.add(aUser);
 	}
 	
-	public void writeToListGroup(groups aGroup ) {
+	public void writeToListGroup(groups aGroup) {
 		listOfGroups.add(aGroup);
 	}
 	

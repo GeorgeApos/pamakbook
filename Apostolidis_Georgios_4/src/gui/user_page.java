@@ -42,7 +42,7 @@ public class user_page extends JFrame
 		
 		for(users aUser : connector.getUsersOfTheApp()) {
 			if(aUser.getEmail().equals(email)) {
-				suggestedFriends.setText(aUser.suggestedFriends(connector));
+				suggestedFriends.setText(aUser.suggestedFriends());
 			}
 		}
 		
@@ -64,7 +64,6 @@ public class user_page extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				
 				for(users aSampleUser : connector.getUsersOfTheApp()) {
 					if(aSampleUser.getEmail().equals(email)) {
 						firstUser = aSampleUser;
@@ -77,17 +76,17 @@ public class user_page extends JFrame
 					}
 				}
 					
-
 				if(!firstUser.checkIfFriend(secondUser)) {
 					firstUser.addFriend(secondUser);
 					JOptionPane.showMessageDialog(userPage, firstUser.getName() + " is now friend with " + secondUser.getName());
 				}else {
 					JOptionPane.showMessageDialog(userPage, "Users are already Friends");
 				}
+
 				
 				for(users aUser : connector.getUsersOfTheApp()) {
 					if(aUser.getEmail().equals(email)) {
-						suggestedFriends.setText(aUser.suggestedFriends(connector));
+						suggestedFriends.setText(aUser.suggestedFriends());
 					}
 				}
 			}
@@ -95,35 +94,37 @@ public class user_page extends JFrame
 		
 		subToGroupButton.addActionListener(new ActionListener() {
 			
-			users subscriber;
+			users firstUser;
+			String nameOfGroup;
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				for(users aUser : connector.getUsersOfTheApp()) {
-					if(aUser.getEmail().equals(email)){
-						subscriber = aUser;
+				for(users aSampleUser : connector.getUsersOfTheApp()) {
+					if(aSampleUser.getEmail().equals(email)) {
+						firstUser = aSampleUser;
 					}
 				}
 				
+				nameOfGroup = subToGroup.getText();
 				for(groups aGroup : connector.getListOfGroups()) {
-					if(aGroup.getName().equals(subToGroup.getText())) {
-						if(aGroup.checkGroupForMember(subscriber, connector)) {
-							aGroup.inGroupAddMember(subscriber, connector);
-							JOptionPane.showMessageDialog(userPage, subscriber.getName() + "is enrolled in Group " + aGroup.getName());
+					if(aGroup.getName().equals(nameOfGroup)) {
+						if(!aGroup.checkGroupForMember(firstUser, connector)) {
+							aGroup.inGroupAddMember(firstUser, connector);
+							JOptionPane.showMessageDialog(userPage, firstUser.getName() + " has been enrolled in " + nameOfGroup);
 							break;
 						}else {
-							JOptionPane.showMessageDialog(userPage, subscriber.getName() + "is already enrolled in " + aGroup.getName());
+							JOptionPane.showMessageDialog(userPage, firstUser.getName() + " has already been enrolled in " + nameOfGroup);
+							break;
 						}
-							
 					}else {
-						JOptionPane.showMessageDialog(userPage, "There isn't any group named like that!");
+						JOptionPane.showMessageDialog(userPage, "This group doesn't exist.");
 						break;
 					}
 				}
 			}
+			
 		});
-		
 		
 		postButton.addActionListener(new ActionListener() {
 
