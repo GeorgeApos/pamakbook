@@ -179,8 +179,22 @@ public class users
 		System.out.println("-----------------------------");
 	}
 	
-	public void suggestedFriends() {
+	public String suggestedFriends(connectedClass connector) {
+		String sugFriendText = "";
 		
+		for(users firstUser : userFriends) {
+			for (users secondUser : firstUser.userFriends) {
+				if(!this.getEmail().equals(secondUser.getEmail())
+						&& this.checkIfFriend(firstUser) 
+						&& !this.checkIfFriend(secondUser)) {
+						sugFriendText += secondUser.getName();
+						sugFriendText += "\n";
+				}
+			}
+		}
+		
+		
+		return sugFriendText;
 	}
 	
 	public void addANewPost(String getText, connectedClass connector) {

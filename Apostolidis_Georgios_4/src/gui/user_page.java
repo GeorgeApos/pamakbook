@@ -40,6 +40,12 @@ public class user_page extends JFrame
 			}
 		}
 		
+		for(users aUser : connector.getUsersOfTheApp()) {
+			if(aUser.getEmail().equals(email)) {
+				suggestedFriends.setText(aUser.suggestedFriends(connector));
+			}
+		}
+		
 		backToLogin.addActionListener(new ActionListener() {
 
 			@Override
@@ -79,6 +85,11 @@ public class user_page extends JFrame
 					JOptionPane.showMessageDialog(userPage, "Users are already Friends");
 				}
 				
+				for(users aUser : connector.getUsersOfTheApp()) {
+					if(aUser.getEmail().equals(email)) {
+						suggestedFriends.setText(aUser.suggestedFriends(connector));
+					}
+				}
 			}
 		});
 		
