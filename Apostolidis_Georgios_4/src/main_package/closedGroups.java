@@ -37,7 +37,7 @@ public class closedGroups extends groups {
 	 */
 	@Override
 	public void inGroupAddMember(users sampleUser, connectedClass connector) {
-		if(this.getListOfMembersInGroups().isEmpty()) {
+		if(connector.getListOfMembersInGroups().isEmpty()) {
 			connector.writeMemberToGroup(sampleUser);
 			sampleUser.setMembersGroup(this);			
 			//System.out.println(sampleUser.getName() + " has been successfully enrolled in group " + this.name);

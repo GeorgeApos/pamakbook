@@ -75,19 +75,23 @@ public class user_page extends JFrame
 						secondUser = aSecondSampleUser;
 					}
 				}
-					
-				if(!firstUser.checkIfFriend(secondUser)) {
-					firstUser.addFriend(secondUser);
-					JOptionPane.showMessageDialog(userPage, firstUser.getName() + " is now friend with " + secondUser.getName());
-				}else {
-					JOptionPane.showMessageDialog(userPage, "Users are already Friends");
-				}
-
 				
-				for(users aUser : connector.getUsersOfTheApp()) {
-					if(aUser.getEmail().equals(email)) {
-						suggestedFriends.setText(aUser.suggestedFriends());
+				if(!(secondUser == null)) {
+					if(!firstUser.checkIfFriend(secondUser)) {
+						firstUser.addFriend(secondUser);
+						JOptionPane.showMessageDialog(userPage, firstUser.getName() + " is now friend with " + secondUser.getName());
+					}else {
+						JOptionPane.showMessageDialog(userPage, "Users are already Friends");
 					}
+	
+					
+					for(users aUser : connector.getUsersOfTheApp()) {
+						if(aUser.getEmail().equals(email)) {
+							suggestedFriends.setText(aUser.suggestedFriends());
+						}
+					}
+				}else {
+					JOptionPane.showMessageDialog(userPage, "There isn't any user named like that.");
 				}
 			}
 		});
@@ -109,7 +113,7 @@ public class user_page extends JFrame
 				nameOfGroup = subToGroup.getText();
 				for(groups aGroup : connector.getListOfGroups()) {
 					if(aGroup.getName().equals(nameOfGroup)) {
-						if(!aGroup.checkGroupForMember(firstUser, connector)) {
+						if(!aGroup.checkGroupForMember(firstUser, connector) && !firstUser.checkForClosedGroups(aGroup, connector)) {
 							aGroup.inGroupAddMember(firstUser, connector);
 							JOptionPane.showMessageDialog(userPage, firstUser.getName() + " has been enrolled in " + nameOfGroup);
 							break;
