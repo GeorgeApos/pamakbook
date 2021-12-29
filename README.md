@@ -1,5 +1,4 @@
 # PamakBook
-Εδώ θα βρείτε την πρώτη μου προσπάθεια να λύσω ένα μεγάλο μέρος μίας εργασίας Αντικειμενοστρεφή Προγραμματισμού.
-Η αλήθεια είναι ότι η συγκεκριμένη έγινε σε 15-20 μέρες, ενώ ήταν να γίνει σε 3-4 μήνες, οπότε σίγουρα μπορούσε
-ο κώδικας να είναι πιο αποδοτικός.
-
+Here you will find my first attempt to solve a large part of an Object Oriented Programming task.
+The truth is that this was done in 15-20 days, while it was to be done in 3-4 months, so it certainly could
+the code to be more efficient.
